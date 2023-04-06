@@ -52,5 +52,55 @@ int ssu_do_grep()
 		return 0;
 	}
 
-	while ((dirp = readdir(dp)) !=NULL
+	while ((dirp = readdir(dp)) !=NULL)
+	{
+		if(strcmp(dirp->d_name, ".") && strcmp(dirp->d_name, ".."))
+		{
+			strcpy(ptr, dirp->d_name);
+			if(ssu_do_grep()<0)
+				break;
+		}
+	}
+	ptr[-1]=0;
+	closedir(dp);
+	return 0;
+}
+
+void ssu_make_grep(int argc, char *argv[])
+{
+	int i;
+	strcpy(grep_cmd, " grep");
+
+	for(i=1; i<argc-1; i++)
+	{
+		strcat(grep_cmd, " ");
+		strcat(grep_cmd, argv[i]);
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	if(argc<2)
+	{
+		fprintf(stderr, "usage: %s <-CVbchilnsvwx> <-num> <-A num> <-B num> <-f file> <-e> expr <directory>\n", argv[0]);
+		exit(1);
+	}
+	if(pathmax==0)
+	{
+		if ((pathmax=pathconf("/", _PC_PATH_MAX)) <0)
+			pathmax=MAX_PATH_GUESSED;
+		else
+			pathmax++;
+	}
+
+	if((pathname = (char*)malloc(pathmax+1))==NULL)
+	{
+		fprintf(stderr, "malloc error\n");
+		exit(1);
+	}
+
+	strcpy(pathname, argv[argc-1]);
+	ssu_make_grep(argc, argv);
+	ssu_do_grep();
+	exit(0);
 }
