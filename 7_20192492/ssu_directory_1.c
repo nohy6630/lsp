@@ -6,13 +6,13 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#define DIRECTORY_SIZE MAXNAMELEN
+#define DIRECTORY_SIZE MAXNAMELEN // 파일이름의 최대길이를 나타내는 상수
 
-int main()
+int main(int argc, int *argv[])
 {
 	struct dirent *dentry;
 	struct stat statbuf;
-	char filename[DIRECTORY_SIZE+1];
+	char filename[DIRECTORY_SIZE + 1];
 	DIR *dirp;
 
 	if (argc < 2)
@@ -22,17 +22,19 @@ int main()
 	}
 
 	if ((dirp = opendir(argv[1])) == NULL || chdir(argv[1]) == -1)
+	// 디렉토리 스트림을 받아오고 작업디렉토리를 전환함.
 	{
 		fprintf(stderr, "opendir, chdir error for %s\n", argv[1]);
 		exit(1);
 	}
 
 	while ((dentry = readdir(dirp)) != NULL)
+	// 디렉토리 스트림으로부터 디렉토리 내 파일정보를 받아옴.
 	{
-		if (dentry->d_ino == 0)
+		if (dentry->d_ino == 0) // inode가 0인경우는 파일이 존재하지 않는 경우
 			continue;
 
-		memcpy(filename, dentry->d_name, DIRECTORY_SIZE);
+		memcpy(filename, dentry->d_name, DIRECTORY_SIZE); // 파일이름 가져옴
 
 		if (stat(filename, &statbuf) == -1)
 		{
@@ -40,7 +42,7 @@ int main()
 			break;
 		}
 
-		if ((statbuf.st_mode & S_IFMY) == S_IFREG)
+		if ((statbuf.st_mode & S_IFMT) == S_IFREG)
 			printf("%-14s %ld\n", filename, statbuf.st_size);
 		else
 			printf("%-14s\n", filename);

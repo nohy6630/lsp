@@ -4,7 +4,7 @@
 
 int main()
 {
-	if (chdir("/etc")<0)
+	if (chdir("/etc")<0)// /etc로 프로세스의 작업디렉토리를 변경한다.
 	{
 		fprintf(stderr, "chdir error\n");
 		exit(1);
