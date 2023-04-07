@@ -9,7 +9,7 @@ void ssu_setbuf(FILE *fp, char *buf);
 int main()
 {
     char buf[BUFFER_SIZE];
-    char *fname = "/dev/pts/19";
+    char *fname = "/dev/pts/2";
     FILE *fp;
 
     if ((fp = fopen(fname, "w")) == NULL)
