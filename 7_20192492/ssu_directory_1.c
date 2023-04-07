@@ -6,9 +6,9 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#define DIRECTORY_SIZE MAXNAMELEN // 파일이름의 최대길이를 나타내는 상수
+#define DIRECTORY_SIZE MAXNAMLEN // 파일이름의 최대길이를 나타내는 상수
 
-int main(int argc, int *argv[])
+int main(int argc, char *argv[])
 {
 	struct dirent *dentry;
 	struct stat statbuf;
