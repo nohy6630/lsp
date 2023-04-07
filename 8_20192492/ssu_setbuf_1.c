@@ -8,7 +8,7 @@ int main()
 {
 	char buf[BUFFER_SIZE];
 
-	setbuf(stdout, buf);
+	setbuf(stdout, buf); // 표쥰출력의 버퍼크기를 1024로 지정한다.
 	printf("Hello, ");
 	sleep(1);
 	printf("OSLAB!!");
@@ -16,7 +16,7 @@ int main()
 	printf("\n");
 	sleep(1);
 
-	setbuf(stdout, NULL);
+	setbuf(stdout, NULL); // 표준출력의 버퍼크기를 NULL로 지정하여 버퍼링을 비활성화시킴
 	printf("How");
 	sleep(1);
 	printf(" are");

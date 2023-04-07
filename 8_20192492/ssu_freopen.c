@@ -15,7 +15,7 @@ int main()
 		exit(1);
 	}
 
-	if (freopen(fname, "w", stdout) != NULL)
+	if (freopen(fname, "w", stdout) != NULL) // 표준출력 파일포인터에 읽기모드로 연 ssu_test.txt의 파일스트림을 연결한다.
 		printf("Second printf : Hello, OSLAB!!\n");
 
 	exit(0);
