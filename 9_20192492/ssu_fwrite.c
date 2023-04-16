@@ -19,9 +19,9 @@ int main(void)
         exit(1);
     }
 
-    printf("Input ID» ");
+    printf("Input ID>> ");
     scanf("%d", &test1.id);
-    printf("Input name» ");
+    printf("Input name>> ");
     scanf("%s", test1.name);
 
     if (fwrite(&test1, sizeof(struct ssu_id), 1, fp) != 1)//구조체 변수의 내용을 파일에 기록함.

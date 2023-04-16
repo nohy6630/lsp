@@ -24,7 +24,7 @@ int main(void)
         {
             ungetc(character, fp);//읽은 문자를 다시 버퍼에 되돌려놓음
             operator= fgetc(fp);//버퍼에 돌려놓은 연산자 문자를 다시 읽음
-            printf("Operator =〉 %c\n", operator);
+            printf("Operator => %c\n", operator);
         }
     }
     fclose(fp);

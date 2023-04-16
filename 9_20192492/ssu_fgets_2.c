@@ -6,7 +6,7 @@
 int main(void)
 {
     char command[BUFFER_MAX];
-    char *prompt = "Prompt»";
+    char *prompt = "Prompt>>";
 
     while (1)
     {
