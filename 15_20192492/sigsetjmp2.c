@@ -48,7 +48,7 @@ void ssu_mask(const char *str)
 
 	err_num=errno;
 
-	if(sigprocmask(0, null, &sig_set)<0)
+	if(sigprocmask(0, NULL, &sig_set)<0)//첫번째 인수의 0은 SIG_SETMASK를 의미 시그널집합을 sig_set에 저장
 	{
 		printf("sigprocmask() error");
 		exit(1);
@@ -56,10 +56,10 @@ void ssu_mask(const char *str)
 
 	printf("%s", str);
 
-	if(sigismember(&sigset, SIGINT))
+	if(sigismember(&sig_set, SIGINT))
 		printf("SIGINT ");
 
-	if(sigismember(&sigset, SIGQUIT))
+	if(sigismember(&sig_set, SIGQUIT))
 		printf("SIGQUIT ");
 
 	if(sigismember(&sig_set, SIGUSR1))

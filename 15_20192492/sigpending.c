@@ -10,13 +10,13 @@ int main()
 	int count = 0;
 
 	sigfillset(&sig_set);
-	sigprocmask(SIG_SETMASK, &sig_set, NULL);
+	sigprocmask(SIG_SETMASK, &sig_set, NULL);//sig_set에 포함된 시그널들을 블록
 
 	while(1)
 	{
 		printf("count: %d\n", count++);
 		sleep(1);
-		if(sigpending(&pendingset)==0)
+		if(sigpending(&pendingset)==0)//블록 또는 팬딩된 시그널 집합을 가져옴
 		{
 			if(sigismember(&pendingset,SIGINT))
 			{

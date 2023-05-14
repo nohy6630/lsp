@@ -26,8 +26,8 @@ void ssu_signal_handler(int signo)
 {
 	char character;
 
-	signal(signo, SIG_IGN);
-	printf("Did you hit Ctrl-c?\n","Do you really want to quit? [y/n] ");
+	signal(signo, SIG_IGN);//SIG_IGN로 핸들러 등록, 바로 종료안됨
+	printf("Did you hit Ctrl-c?\nDo you really want to quit? [y/n] ");
 
 	character = getchar();
 	if(character=='y'||character=='Y')
@@ -35,6 +35,6 @@ void ssu_signal_handler(int signo)
 	else
 	{
 		signal(SIGINT,ssu_signal_handler);
-		longjmp(jump_buffer,1);
+		longjmp(jump_buffer,1);//setjmp() 위치로 이동
 	}
 }

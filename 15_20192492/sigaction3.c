@@ -17,7 +17,7 @@ int main()
 	sigaddset(&act_int.sa_mask, SIGQUIT);
 	act_quit.sa_flags=0;
 
-	if(sigaction(SIGINT, &act_int, NULL)<0)
+	if(sigaction(SIGINT, &act_int, NULL)<0)//SIGINT가 발생하면 act_int가 실행되게 설정
 	{
 		fprintf(stderr, "sigaction(SIGINT) error\n");
 		exit(1);
@@ -27,11 +27,29 @@ int main()
 	sigemptyset(&act_quit.sa_mask);
 	sigaddset(&act_quit.sa_mask, SIGINT);
 	act_int.sa_flags=0;
-	if(sigaction(SIGQUIT, &act_quit, NULL)<0)
+	if(sigaction(SIGQUIT, &act_quit, NULL)<0)//SIGQUIT가 발생하면 act_quit가 실행되게 설정
 	{
 		fprintf(stderr, "sigaction(SIGQUIT) error\n");
 		exit(1);
 	}
 	pause();
 	exit(0);
+}
+
+static void ssu_signal_handler1(int signo)
+{
+	printf("Signal handler of SIGINT : %d\n",signo);
+	printf("SIGQUIT signal is blocked : %d\n", signo);
+	printf("sleeping 3 sec\n");
+	sleep(3);
+	printf("Signal handler of SIGINT ended\n");
+}
+
+static void ssu_signal_handler2(int signo)
+{
+	printf("Signal handler of SIGQUIT : %d\n",signo);
+	printf("SIGINT signal is blocked : %d\n", signo);
+	printf("sleeping 3 sec\n");
+	sleep(3);
+	printf("Signal handler of SIGQUIT ended\n");
 }
