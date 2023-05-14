@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<signal.h>
+#include<sched.h>
 
 int main()
 {
@@ -9,9 +10,10 @@ int main()
 	int count;
 
 	sigemptyset(&sig_set);
-	sigaddset(&sig_set,SIGINT);
+	//sigaddset(&sig_set,SIGINT);
 	sigprocmask(SIG_BLOCK,&sig_set,NULL);//sig_set에 있는 시그널들을 block한다.
-	
+	sigaddset(&sig_set,SIGINT);
+
 	for(count=3;0<count;count--)
 	{
 		printf("count %d\n", count);
