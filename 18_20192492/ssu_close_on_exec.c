@@ -12,7 +12,7 @@ int main()
 
 	if ((fd = open("exec_copy.txt", O_CREAT)) < 0)
 	{
-		fprintf(stedrr, "open error for %s\n", "exec_copy.txt");
+		fprintf(stderr, "open error for %s\n", "exec_copy.txt");
 		exit(1);
 	}
 	val = fcntl(fd, F_GETFD, 0);
