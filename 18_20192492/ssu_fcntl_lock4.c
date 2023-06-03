@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 
 		if(ans[0]!='y')
 		{
-			lock_l.type=F_UNLCK;
+			lock.l_type=F_UNLCK;
 			fcntl(fd, F_SETLK, &lock);
 			continue;
 		}

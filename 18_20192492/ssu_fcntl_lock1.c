@@ -1,13 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<unistd.h>
-#include<error.h>
+#include<errno.h>
 #include<fcntl.h>
 
 #define NAMESIZE 50
 #define MAXTRIES 5
 
-struct employee{
+struct employee
+{
 	char name[NAMESIZE];
 	int salary;
 	int pid;
@@ -32,9 +33,9 @@ int main(int argc, char *argv[])
 	lock.l_start = 0;
 	lock.l_len = 0;
 
-	while(fcntl(fd, F_SETLK, &lock) == -1)
+	while(fcntl(fd, F_SETLK, &lock) == -1)//파일 락
 	{
-		if(errno == EACCES)
+		if(errno == EACCES)//이미 다른 프로세스에 의해  락된경우
 		{
 			if(try++ < MAXTRIES)
 			{
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
 	}
 	sum = 0;
 	while(read(fd, (char *)&record, sizeof(record)) > 0)
+
 	{
 		printf("Employee: %s, Salary: %d\n", record.name, record.salary);
 		sum += record.salary;
@@ -56,6 +58,6 @@ int main(int argc, char *argv[])
 	printf("\nTotal salary: %d\n", sum);
 
 	lock.l_type = F_UNLCK;
-	fcntl(fd, F_SETLK, &lock);
+	fcntl(fd, F_SETLK, &lock);//파일 락 해제
 	close(fd);
 }

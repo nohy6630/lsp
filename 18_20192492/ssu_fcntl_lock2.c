@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 		perror(argv[1]);
 		exit(1);
 	}
-	lock.l_type = F_WRLCK;//s
+	lock.l_type = F_WRLCK;//파일 락
 	lock.l_whence = 0;
 	lock.l_start = 0;
 	lock.l_len = 0;
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	}
 	sprintf(command, "vim %s\n", argv[1]);
 	system(command);
-	lock.l_type = F_UNLCK;
+	lock.l_type = F_UNLCK;//파일 언락
 	fcntl(fd, F_SETLK, &lock);
 	close(fd);
 

@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 			perror(argv[1]);
 			exit(2);
 		}
-		lseek(fd, positon, 0);
+		lseek(fd, position, 0);
 		if(read(fd, (char*)&record, sizeof(record)) == 0)
 		{
 			printf("record %d not found\n", recnum);
