@@ -8,7 +8,7 @@ int main()
 {
 	int flag;
 
-	if((flag=fcntl(STDOUT_FILENO, F_DUPFD))==-1)
+	if((flag=fcntl(STDOUT_FILENO, F_DUPFD))==-1)//필요인자가 없으므로 -1 리턴
 	{
 		fprintf(stderr, "Error : Checking CLOSE_ON_EXEC\n");
 		exit(1);

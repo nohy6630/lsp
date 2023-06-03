@@ -10,9 +10,9 @@ int main()
 
 	fd = open("test.txt", O_CREAT);
 
-	testfd = fcntl(fd, F_DUPFD, 5);
+	testfd = fcntl(fd, F_DUPFD, 5);//파일디스크립터 복제
 	printf("testfd = %d\n", testfd);
-	testfd = fcntl(fd, F_DUPFD, 5);
+	testfd = fcntl(fd, F_DUPFD, 5);//파일디스크립터 5가 이미 사용중이므로 6에 복제됨
 	printf("testfd = %d\n", testfd);
 
 	getchar();

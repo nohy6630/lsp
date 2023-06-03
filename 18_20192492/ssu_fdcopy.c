@@ -18,6 +18,6 @@ int main()
 	}
 
 	close(STDOUT_FILENO);
-	write(3, MSG, strlen(MSG));
+	write(3, MSG, strlen(MSG));//3 파일디스크립터에 표준출력 파일디스크립터를 복제해놨으므로 표준출력으로 출력됨.
 	exit(0);
 }
