@@ -18,7 +18,7 @@ int main()
 		exit(1);
 	}
 
-	alarm(3);//10 초후에 SIGALRM 시그널이 발생하도록 설정
+	alarm(10);//10 초후에 SIGALRM 시그널이 발생하도록 설정
 
 	if((n=read(STDIN_FILENO,buf,LINE_MAX))<0)
 	{
@@ -28,11 +28,6 @@ int main()
 
 	alarm(0);//설정되있는 알람을 해제
 	write(STDOUT_FILENO,buf,n);
-	while(1)
-	{
-		alarm(1);
-		//sleep(5);
-	}
 	exit(0);
 }
 
